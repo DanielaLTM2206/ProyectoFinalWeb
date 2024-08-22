@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Panel de Control</title>
+    <link href="../css/estilo.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div class="menu">
+        <div class="menu-container">
+            <button id="logoutBtn">Cerrar Sesión</button>
+        </div>
+    </div>
+    
+    <div class="content">
+        <h2>Bienvenido, Bodeguero</h2>
+	    </div>
+    
+    <script type="text/javascript" src="../js/login.js"></script>
+    <script type="text/javascript">
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            window.location.href = '../index.html'; // Redirige al login (index.html)
+        });
+    </script>
+</body>
+</html>
