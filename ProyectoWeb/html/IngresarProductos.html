@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Panel de Control</title>
+    <link href="../css/estilo.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>Bienvenido Alexis</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="#">Perfil</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-btn">Productos &#9662;</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Ingresar Producto</a></li>
+                    <li><a href="#">Actualizar Producto</a></li>
+                    <li><a href="#">Buscar Producto</a></li>
+                    <li><a href="#">Listar productos</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Utilidades</a></li>
+            <li><a href="#">Páginas</a></li>
+            <li><a href="#">Gráficas</a></li>
+            <li><a href="#">Tablas</a></li>
+        </ul>
+        <form id="form1" action="../index.html">
+            <button id="logoutBtn">Cerrar Sesión</button>
+        </form>
+    </div>
+
+    <div class="main-content">
+        <div class="form-container">
+            <h2>Ingresar Nuevo Producto</h2>
+            <br>
+            <form id="product-form" action="../php/envioProductos.php" method="post">
+                <div class="input-group">
+                    <label for="product-name">Nombre del Producto</label>
+                    <input type="text" id="pronombre" name="pronombre" required>
+                </div>
+                <div class="input-group">
+                    <label for="product-price">Precio</label>
+                    <input type="number" id="precio" name="precio" step="0.01" required>
+                </div>
+                    <div class="input-group">
+                    <label for="product-amount">Cantidad</label>
+                    <input type="number" id="cantidad" name="cantidad" step="1" max="100" min="25" required>
+                </div>
+                <div class="input-group">
+                    <label for="product-category">Categoría</label>
+                    <input type="text" id="categoria" name="categoria" required>
+                </div>
+                <button type="submit">Agregar Producto</button>
+            </form>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="../js/bodegero.js"></script>
+</body>
+</html>
