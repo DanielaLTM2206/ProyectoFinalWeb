@@ -1,78 +1,57 @@
 <?php
-$servername = "localhost";
-$username = "admin";
-$password = "admin";
-$dbname = "productos";
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-// Crear conexión
-$conn = new mysqli($servername, $username, $password, $dbname);
+require 'conexion.php'; // Asegúrate de que la ruta sea correcta
 
-// Verificar conexión
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
-}
+// Crear una instancia de la conexión a la base de datos
+$db = new DatabaseConnection();
+$conn = $db->conn;
 
-// Inicializar variables
-$errors = [];
-$pronombre = $precio = $cantidad = $categoria = "";
-
-// Validar si se envió el formulario
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $pronombre = trim($_POST['pronombre']);
-    $precio = trim($_POST['precio']);
-    $cantidad = trim($_POST['cantidad']);
-    $categoria = trim($_POST['categoria']);
-    
-    // Validaciones básicas
-    if (empty($pronombre) || empty($precio) || empty($cantidad) || empty($categoria)) {
-        $errors[] = "Todos los campos son obligatorios.";
-    }
-    
-    if (!is_numeric($precio) || $precio <= 0) {
-        $errors[] = "El precio debe ser un valor numérico positivo.";
-    }
-    
-    if (!is_numeric($cantidad) || $cantidad <= 0) {
-        $errors[] = "La cantidad debe ser un valor numérico positivo.";
-    }
-    
-    // Verificar si hay errores antes de intentar almacenar los datos
-    if (empty($errors)) {
-        // Preparar y vincular
-        $stmt = $conn->prepare("INSERT INTO datosproductos (pronombre, precio, cantidad, categoria) VALUES (?, ?, ?, ?)");
-        
-        if ($stmt === false) {
-            die("Error en la preparación de la declaración: " . $conn->error);
-        }
-        
-        $stmt->bind_param("sdss", $pronombre, $precio, $cantidad, $categoria);
+    // Obtención de datos del formulario
+    $nombre = $_POST['nombre'] ?? null;
+    $precioUnitario = $_POST['precioUnitario'] ?? null;
+    $cantidad = $_POST['cantidad'] ?? null;
+    $categoria = $_POST['categoria'] ?? null;
+    $detalle = $_POST['detalle'] ?? null;
+    $fechaIngreso = $_POST['fechaIngreso'] ?? null;
+    $precioVenta = $_POST['precioVenta'] ?? null;
 
-        // Ejecutar la consulta
-        if ($stmt->execute()) {
-            echo "<script>
-                    alert('Datos almacenados correctamente...');
-                    window.location.href = '../html/IngresarProductos.html';
-                  </script>";
-        } else {
-            echo "<script>
-                    alert('Error al almacenar los datos: " . $stmt->error . "');
-                    window.location.href = '../html/IngresarProductos.html';
-                  </script>";
-        }
+    // Validación básica
+    if (empty($nombre) || empty($precioUnitario) || empty($cantidad) || empty($categoria) || empty($detalle) || empty($fechaIngreso)) {
+        die("Todos los campos son obligatorios.");
+    }
 
-        // Cerrar la declaración
-        $stmt->close();
+    if ($precioUnitario < 0 || $cantidad < 1 || ($precioVenta !== null && $precioVenta < 0)) {
+        die("El precio unitario, la cantidad y el precio de venta deben ser valores positivos, y la cantidad debe ser mayor o igual a 1.");
+    }
+
+    // Generar un código único para el producto
+    $codigo = uniqid('prod_');
+
+    // Si el usuario es un bodeguero, no se debe ingresar el precioVenta
+    if (!isset($_POST['es_admin']) || $_POST['es_admin'] !== 'true') {
+        $precioVenta = null; // Asignar null si no está disponible
+    }
+
+    // Inserción en la base de datos
+    $sql = "INSERT INTO productos (codigo, nombre, precioUnitario, cantidad, categoria, fechaIngreso, detalle, precioVenta) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+
+    if ($stmt === false) {
+        die("Error en la preparación de la consulta: " . $conn->error);
+    }
+
+    $stmt->bind_param("ssissssi", $codigo, $nombre, $precioUnitario, $cantidad, $categoria, $fechaIngreso, $detalle, $precioVenta);
+
+    if ($stmt->execute()) {
+        echo "Producto agregado con éxito.";
     } else {
-        // Mostrar errores
-        foreach ($errors as $error) {
-            echo "<script>alert('$error');</script>";
-        }
-        echo "<script>window.history.back();</script>"; // Regresar al formulario
+        echo "Error en la inserción: " . $stmt->error;
     }
-    
-    // Cerrar la conexión
-    $conn->close();
-} else {
-    echo "<script>window.history.back();</script>"; // Regresar al formulario si no es POST
+
+    $stmt->close();
+    $db->closeConnection();
 }
 ?>

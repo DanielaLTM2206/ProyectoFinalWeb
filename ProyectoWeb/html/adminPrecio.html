@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingresar Producto - Administrador</title>
+    <link href="../css/estilo.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div class="main-content">
+        <div class="form-container">
+            <h2 class="form-header">Ingresar Nuevo Producto</h2>
+            <form id="product-form" action="../php/envioProductos.php" method="post">
+                <div class="form-group">
+                    <label for="product-name">Nombre del Producto</label>
+                    <input type="text" id="product-name" name="nombre" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-amount">Cantidad</label>
+                    <input type="number" id="product-amount" name="cantidad" class="form-control" step="1" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-category">Categoría</label>
+                    <select id="product-category" name="categoria" class="form-control" required>
+                        <option value="">Selecciona una categoría</option>
+                        <option value="Herramientas">Herramientas</option>
+                        <option value="Materiales">Materiales</option>
+                        <option value="Accesorios">Accesorios</option>
+                        <option value="Electrodomésticos">Electrodomésticos</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="product-date">Fecha de Ingreso</label>
+                    <input type="date" id="product-date" name="fechaIngreso" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-detail">Descripción del Producto</label>
+                    <textarea id="product-detail" name="detalle" class="form-control" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="product-unit-price">Precio Unitario (en USD)</label>
+                    <input type="number" id="product-unit-price" name="precioUnitario" class="form-control" step="0.01" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-sale-price">Precio de Venta (en USD)</label>
+                    <input type="number" id="product-sale-price" name="precioVenta" class="form-control" step="0.01" min="0">
+                </div>
+                <button type="submit" class="btn btn-primary">Agregar Producto</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
