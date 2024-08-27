@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 27-08-2024 a las 03:39:44
+-- Tiempo de generación: 27-08-2024 a las 03:49:11
 -- Versión del servidor: 8.0.17
 -- Versión de PHP: 7.3.10
 
@@ -18,6 +18,56 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
+--
+-- Base de datos: `academia`
+--
+CREATE DATABASE IF NOT EXISTS `academia` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `academia`;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `acad_usuarios`
+--
+
+CREATE TABLE `acad_usuarios` (
+  `id` int(4) NOT NULL,
+  `nombre` varchar(150) NOT NULL,
+  `cedula` varchar(150) NOT NULL,
+  `telefono` varchar(10) NOT NULL,
+  `user` varchar(10) NOT NULL,
+  `clave` varchar(20) NOT NULL,
+  `estado` varchar(10) NOT NULL DEFAULT 'Activo'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `acad_usuarios`
+--
+
+INSERT INTO `acad_usuarios` (`id`, `nombre`, `cedula`, `telefono`, `user`, `clave`, `estado`) VALUES
+(6, 'Daniela Lissette', 'Tituaña Moreno', '0998072068', 'gsTituana2', '1SM$jdasdadda', 'Activo'),
+(7, 'Gustavo Stiven', 'Molina Guaico', '0998072068', 'gsMolina2', 'Wm3$mdasdada', 'Activo'),
+(8, 'Maria Fernanda', 'Molina Guaico', '0998072068', 'gsGuaico2', '3$Madasdsa', 'Activo');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `acad_usuarios`
+--
+ALTER TABLE `acad_usuarios`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `acad_usuarios`
+--
+ALTER TABLE `acad_usuarios`
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- Base de datos: `ferreteria`
 --
@@ -49,7 +99,28 @@ CREATE TABLE `credenciales` (
 INSERT INTO `credenciales` (`id`, `usuario`, `contraseña`, `rol`, `nombre`, `apellido`, `descripcion`, `accesos`, `estado`) VALUES
 (1, 'admin', 'admin', 'admin', 'gustavo', 'molina', 'perfil de usuario administrador con acceso a todos los elementos del menú', 'usuarios, proveedores, clientes, reportes, perfil de usuarios', 'Activo'),
 (2, 'alexis', 'pass1', 'bodeguero', 'alexis', 'chimba', 'perfil de usuario bodeguero con acceso al inventario de productos (ingreso, eliminacion, actualizacion)', 'este perfil tiene accesos a productos, proveedores y reportes ', 'Activo'),
-(0, 'gsmolina', 'hola123', 'admin', 'Gustavo Stiven', 'Molina Guaico', 'este usuario puede hacer lo que quiera', 'este usuario puede hacer lo que quiera', 'Activo');
+(3, 'gsmolina2', 'hola123', 'admin', 'Gustavo Stiven', 'Molina Guaico', 'Este usuario puede hacer lo que quiera', 'Este usuario puede hacer lo que quiera', 'Activo');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `credenciales`
+--
+ALTER TABLE `credenciales`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `usuario` (`usuario`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `credenciales`
+--
+ALTER TABLE `credenciales`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- Base de datos: `persona`
 --
@@ -63,20 +134,42 @@ USE `persona`;
 --
 
 CREATE TABLE `persona` (
-  `name` varchar(50) NOT NULL,
-  `lastname` varchar(50) NOT NULL,
+  `id` int(10) NOT NULL,
+  `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `lastname` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `email` varchar(50) NOT NULL,
-  `age` int(12) NOT NULL,
-  `birthday` varchar(50) NOT NULL
+  `age` int(10) NOT NULL,
+  `birthday` date NOT NULL,
+  `estado` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'Activo'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `persona`
 --
 
-INSERT INTO `persona` (`name`, `lastname`, `email`, `age`, `birthday`) VALUES
-('Gustavo Stiven', 'Molina Guaico', 'stevemolin2001@hotmail.com', 0, '2024-08-09'),
-('Maria Fernanda ', 'Molina Guaico', 'stevemolin201@hotmail.com', 22, '2001-11-09');
+INSERT INTO `persona` (`id`, `name`, `lastname`, `email`, `age`, `birthday`, `estado`) VALUES
+(4, 'Gustavo', 'Molina', 'stevemolin2017@hotmail.com', 0, '2024-08-04', 'Activo'),
+(5, 'Gustavo', 'Guaico', 'stevemolin2017@hotmail.com', 0, '2024-08-20', 'Activo');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `persona`
+--
+ALTER TABLE `persona`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `persona`
+--
+ALTER TABLE `persona`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- Base de datos: `personal`
 --
@@ -91,11 +184,11 @@ USE `personal`;
 
 CREATE TABLE `datos` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(30) NOT NULL,
-  `apellido` varchar(30) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `apellido` varchar(50) NOT NULL,
   `cedula` varchar(20) NOT NULL,
-  `email` varchar(35) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `ecivil` varchar(30) NOT NULL,
+  `email` varchar(20) NOT NULL,
+  `ecivil` varchar(12) NOT NULL,
   `fnacimiento` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -104,9 +197,11 @@ CREATE TABLE `datos` (
 --
 
 INSERT INTO `datos` (`id`, `nombre`, `apellido`, `cedula`, `email`, `ecivil`, `fnacimiento`) VALUES
-(6, 'Gustavo Stiven', 'Molina Lopez', '1723548101', 'stevemolin2001@hotmail.com', 'Casado', '2001-11-09'),
-(7, 'Maria Fernanda', 'Molina Guaico', '1753354313', 'stevemolin2017@hotmail.com', 'Divorciado', '1999-10-23'),
-(8, 'Christian Paul', 'Molina Guaico', '1723548102', 'stevemolin2002@hotmail.com', 'Casado', '2024-08-30');
+(1, 'Maria Fernanda', 'Molina Guiaco', '1723548101', 'stevenmolin2001@gmai', 'Viudo', '2024-08-23'),
+(2, 'Gustavo Stiven', 'Molina Guaico', '1753354313', 'stevenmolin2001@gmai', 'Soltero', '2024-09-01'),
+(4, 'Ericka Micaela', 'Gutierrez Sandoval', '1753354317', 'stevemolin2017@hotma', 'Soltera', '2024-08-17'),
+(5, 'Maria Fernanda', '', '1723548102', 'stevemolin201u@hotma', 'Divorciado', '0000-00-00'),
+(7, 'Axel Daniel', 'Chiriboga Herrera', '1723548100', 'stevemolin201u@hotma', 'Casado', '2024-08-17');
 
 --
 -- Índices para tablas volcadas
@@ -127,7 +222,7 @@ ALTER TABLE `datos`
 -- AUTO_INCREMENT de la tabla `datos`
 --
 ALTER TABLE `datos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- Base de datos: `productos`
 --
@@ -154,7 +249,8 @@ CREATE TABLE `datosproductos` (
 
 INSERT INTO `datosproductos` (`id`, `pronombre`, `precio`, `cantidad`, `categoria`) VALUES
 (2, 'Manzana', 50, '60', 'Fruta'),
-(3, 'Pera', 50, '100', 'Fruta');
+(3, 'Pera', 50, '100', 'Fruta'),
+(4, 'manzana', 50, '40', 'Fruta');
 
 --
 -- Índices para tablas volcadas
@@ -174,7 +270,7 @@ ALTER TABLE `datosproductos`
 -- AUTO_INCREMENT de la tabla `datosproductos`
 --
 ALTER TABLE `datosproductos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
