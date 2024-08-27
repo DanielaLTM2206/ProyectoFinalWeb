@@ -7,21 +7,23 @@
     <link href="../css/estilo.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <div class="menu">
-        <div class="menu-container">
-            <button id="logoutBtn">Cerrar Sesión</button>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>Bienvenido</h2>
         </div>
+        <ul class="sidebar-menu">
+            <li><a href="nuevosUsuarios.html">Usuarios</a></li>
+            <li><a href="#">Productos</a></li>
+            <li><a href="#">Clientes</a></li>
+            <li><a href="#">Provedores</a></li>
+            <li><a href="#">Reportes</a></li>
+            <li><a href="#">Perfiles</a></li>
+        </ul>
+        <form id="form1" action="../index.html">
+            <button id="logoutBtn">Cerrar Sesión</button>
+        </form>
     </div>
-    
-    <div class="content">
-        <h2>Bienvenido, Admin</h2>
-	    </div>
-    
-    <script type="text/javascript" src="../js/login.js"></script>
-    <script type="text/javascript">
-        document.getElementById('logoutBtn').addEventListener('click', function() {
-            window.location.href = '../index.html'; // Redirige al login (index.html)
-        });
-    </script>
+
+    <script type="text/javascript" src="../js/bodegero.js"></script>
 </body>
 </html>
