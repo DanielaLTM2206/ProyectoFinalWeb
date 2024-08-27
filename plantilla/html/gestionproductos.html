@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Productos</title>
+    <link rel="stylesheet" href="../css/styles.css"> <!-- Asegúrate de enlazar tu CSS aquí -->
+</head>
+<body>
+    <div class="product-container">
+        <h1>Gestión de Productos</h1>
+        <form id="productForm">
+            <div class="input-group">
+                <label for="codigo">Código</label>
+                <input type="text" id="codigo" name="codigo" required>
+            </div>
+            <div class="input-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            <div class="input-group">
+                <label for="cantidad">Cantidad</label>
+                <input type="number" id="cantidad" name="cantidad" required>
+            </div>
+            <div class="input-group">
+                <label for="fechaIngreso">Fecha de Ingreso</label>
+                <input type="date" id="fechaIngreso" name="fechaIngreso" required>
+            </div>
+            <div class="input-group">
+                <label for="detalle">Detalle (Descripción del Producto)</label>
+                <textarea id="detalle" name="detalle" rows="4" required></textarea>
+            </div>
+            <div class="input-group">
+                <label for="precioUnitario">Precio Unitario</label>
+                <input type="number" id="precioUnitario" name="precioUnitario" step="0.01" required>
+            </div>
+            <div class="input-group">
+                <label for="precioVenta">Precio de Venta</label>
+                <input type="number" id="precioVenta" name="precioVenta" step="0.01" required>
+            </div>
+            <button type="submit">Guardar Producto</button>
+        </form>
+    </div>
+</body>
+</html>
