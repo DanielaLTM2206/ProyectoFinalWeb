@@ -6,6 +6,14 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+#usuarioFormContainer {
+    display: none; /* Asegura que el formulario esté oculto al cargar la página */
+    margin-top: 20px;
+}
+#productoFormContainer{
+    display: none; /* Asegura que el formulario esté oculto al cargar la página */
+    margin-top: 20px;
+}
 /* Estilo para el body */
 body {
     display: flex;
@@ -268,3 +276,4 @@ button:hover {
     color: #dc3545; /* Color rojo para los mensajes de error */
     margin-top: 10px;
 }
+

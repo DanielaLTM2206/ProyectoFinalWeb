@@ -13,7 +13,15 @@
         </div>
         <ul class="sidebar-menu">
             <li><a href="#" id="usuariosLink">Usuarios</a></li>
-            <li><a href="#">Productos</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-btn">Productos &#9662;</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#" id="ingresarProductoLink">Ingresar Producto</a></li>
+                    <li><a href="#">Actualizar Producto</a></li>
+                    <li><a href="#">Buscar Producto</a></li>
+                    <li><a href="#">Listar productos</a></li>
+                </ul>
+            </li>
             <li><a href="#">Clientes</a></li>
             <li><a href="#">Provedores</a></li>
             <li><a href="#">Reportes</a></li>
@@ -29,7 +37,7 @@
         <div id="usuarioFormContainer">
             <h2>Agregar Nuevo Usuario</h2>
             <br>
-            <form id="form" name="form1" method="post" action="../php/envioUsuarios.php">
+            <form id="usuarioForm" name="form1" method="post" action="../php/envioUsuarios.php">
                 <div class="form-group">
                     <label for="usuario">Usuario</label>
                     <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Ingrese usuario">
@@ -63,6 +71,48 @@
                     <button type="reset" class="btn btn-secondary">Cancelar</button>
                 </div>
             </form>
+        </div>
+        <div id="productoFormContainer">
+        <div class="form-container">
+         <h2 class="form-header">Ingresar Nuevo Producto</h2>
+                     <form id="product-form" action="../php/envioProductos.php" method="post">
+                <div class="form-group">
+                    <label for="product-name">Nombre del Producto</label>
+                    <input type="text"  id="product-name" name="nombre" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-amount">Cantidad</label>
+                    <input type="number" id="product-amount" name="cantidad" class="form-control" step="1" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-category">Categoría</label>
+                    <select id="product-category" name="categoria" class="form-control" required>
+                        <option value="">Selecciona una categoría</option>
+                        <option value="Herramientas">Herramientas</option>
+                        <option value="Materiales">Materiales</option>
+                        <option value="Accesorios">Accesorios</option>
+                        <option value="Electrodomésticos">Electrodomésticos</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="product-date">Fecha de Ingreso</label>
+                    <input type="date" id="product-date" name="fechaIngreso" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-detail">Descripción del Producto</label>
+                    <textarea id="product-detail" name="detalle" class="form-control" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="product-unit-price">Precio Unitario (en USD)</label>
+                    <input type="number" id="product-unit-price" name="precioUnitario" class="form-control" step="0.01" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-sale-price">Precio de Venta (en USD)</label>
+                    <input type="number" id="product-sale-price" name="precioVenta" class="form-control" step="0.01" min="0">
+                </div>
+                <button type="submit" class="btn btn-primary">Agregar Producto</button>
+            </form>
+        </div>
         </div>
     </div>
     <script src="../js/ocultarDatos.js" type="text/javascript"></script>
