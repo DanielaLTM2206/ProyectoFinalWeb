@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingreso de Productos - Bodeguero</title>
+    <link href="../css/estilo.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>Bienvenido Bodeguero</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="#">Perfil</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-btn">Productos &#9662;</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Ingresar Producto</a></li>
+                    <li><a href="#">Actualizar Producto</a></li>
+                    <li><a href="#">Buscar Producto</a></li>
+                    <li><a href="#">Listar productos</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Utilidades</a></li>
+            <li><a href="#">Páginas</a></li>
+            <li><a href="#">Gráficas</a></li>
+            <li><a href="#">Tablas</a></li>
+        </ul>
+        <form id="form1" action="../index.html">
+            <button id="logoutBtn">Cerrar Sesión</button>
+        </form>
+    </div>
+
+    <div class="main-content">
+        <div class="form-container">
+            <h2 class="form-header">Ingresar Nuevo Producto</h2>
+            <form id="product-form" action="../php/envioProductos.php" method="post">
+                <input type="hidden" name="es_admin" value="false"> <!-- Indica que es un bodeguero -->
+                <div class="form-group">
+                    <label for="nombre">Nombre del Producto</label>
+                    <input type="text" id="nombre" name="nombre" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="precioUnitario">Precio Unitario</label>
+                    <input type="number" id="precioUnitario" name="precioUnitario" class="form-control" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="cantidad">Cantidad</label>
+                    <input type="number" id="cantidad" name="cantidad" class="form-control" step="1" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="categoria">Categoría</label>
+                    <input type="text" id="categoria" name="categoria" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="fechaIngreso">Fecha de Ingreso</label>
+                    <input type="date" id="fechaIngreso" name="fechaIngreso" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="detalle">Descripción del Producto</label>
+                    <textarea id="detalle" name="detalle" class="form-control" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Agregar Producto</button>
+            </form>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="../js/bodegero.js"></script>
+</body>
+</html>
