@@ -1,13 +1,16 @@
 $(document).ready(function() {
+    // Mostrar el formulario de ingreso al cargar la página
     $('#formulario').show();
     $('#productos-lista').hide();
 
+    // Manejador de clic para "Ingresar Producto"
     $('#ingresarProducto').click(function(e) {
         e.preventDefault();
         $('#formulario').show();
         $('#productos-lista').hide();
     });
 
+    // Manejador de clic para "Listar productos"
     $('#listarProductos').click(function(e) {
         e.preventDefault();
         $('#formulario').hide();
@@ -15,15 +18,23 @@ $(document).ready(function() {
         listarProductos(); // Cargar la lista de productos
     });
 
+    // Función para agregar un producto
     $('#product-form').on('submit', function(e) {
         e.preventDefault(); // Evitar el envío del formulario por defecto
         agregarProducto();
     });
-
-    $('#buscador-productos').on('keyup', function() {
-        listarProductos(); // Actualiza la lista de productos con el término de búsqueda
-    });
+	
+// Manejador del buscador de productos
+$('#buscador-productos').on('keyup', function() {
+    listarProductos(); // Actualiza la lista de productos con el término de búsqueda
 });
+;
+
+
+	
+
+});
+
 
 function agregarProducto() {
     if (!validarFormulario()) {
@@ -37,8 +48,9 @@ function agregarProducto() {
         url: '../php/envioProductos.php',
         type: 'POST',
         data: formData,
-        dataType: 'json', // Asegúrate de que se espera un JSON
-        success: function(data) {
+        success: function(response) {
+            console.log(response);
+            const data = JSON.parse(response); // Parsear la respuesta JSON
             if (data.success) {
                 mostrarMensaje(data.message, 'success'); // Mostrar mensaje de éxito
                 $('#product-form')[0].reset(); // Limpiar el formulario
@@ -59,17 +71,19 @@ function listarProductos() {
     $.ajax({
         url: '../php/listarproductos.php?search=' + encodeURIComponent(searchTerm), // Pasar el término de búsqueda
         type: 'GET',
-        dataType: 'html', // Asegúrate de que se espera HTML
         success: function(response) {
             $('#productos-lista tbody').html(response); // Llenar solo el tbody
             $('#productos-lista').show(); // Mostrar la lista de productos
         },
         error: function() {
-            $('#productos-lista tbody').html('<tr><td colspan="7">Error al cargar la lista de productos.</td></tr>');
+            $('#productos-lista tbody').html('<tr><td colspan="8">Error al cargar la lista de productos.</td></tr>');
             $('#productos-lista').show();
         }
     });
 }
+
+
+
 
 function validarFormulario() {
     return $('#nombre').val() && $('#precioUnitario').val() && $('#cantidad').val() && $('#categoria').val() && $('#fechaIngreso').val() && $('#detalle').val();
