@@ -18,7 +18,7 @@
             <li class="dropdown">
                 <a href="#" class="dropdown-btn">Productos &#9662;</a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Ingresar Producto</a></li>
+                    <li><a href="#" id="ingresarProducto">Ingresar Producto</a></li>
                     <li><a href="#">Actualizar Producto</a></li>
                     <li><a href="#">Buscar Producto</a></li>
                     <li><a href="#" id="listarProductos">Listar productos</a></li>
@@ -35,7 +35,7 @@
     </div>
 
     <div class="main-content">
-        <div class="form-container">
+        <div class="form-container" id="formulario">
             <h2 class="form-header">Ingresar Nuevo Producto</h2>
             <form id="product-form" action="../php/envioProductos.php" method="post">
                 <input type="hidden" name="es_admin" value="false"> <!-- Indica que es un bodeguero -->
@@ -75,7 +75,7 @@
         </div>
 
         <!-- Contenedor para la lista de productos -->
-        <div id="productos-lista" class="productos-lista">
+        <div id="productos-lista" class="productos-lista" style="display: none;">
             <!-- La lista de productos se cargará aquí -->
         </div>
     </div>

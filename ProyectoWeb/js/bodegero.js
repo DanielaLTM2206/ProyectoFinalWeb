@@ -1,17 +1,27 @@
 $(document).ready(function() {
-    // Cargar la lista de productos cuando se carga la página
-    listarProductos();
+    // Mostrar el formulario de ingreso al cargar la página
+    $('#formulario').show();
+    $('#productos-lista').hide();
+
+    // Manejador de clic para "Ingresar Producto"
+    $('#ingresarProducto').click(function(e) {
+        e.preventDefault();
+        $('#formulario').show();
+        $('#productos-lista').hide();
+    });
+
+    // Manejador de clic para "Listar productos"
+    $('#listarProductos').click(function(e) {
+        e.preventDefault();
+        $('#formulario').hide();
+        $('#productos-lista').show();
+        listarProductos(); // Cargar la lista de productos
+    });
 
     // Función para agregar un producto
     $('#product-form').on('submit', function(e) {
         e.preventDefault(); // Evitar el envío del formulario por defecto
         agregarProducto();
-    });
-
-    // Función para listar productos
-    $('#listarProductos').click(function(e) {
-        e.preventDefault();
-        listarProductos();
     });
 });
 
@@ -27,13 +37,13 @@ function agregarProducto() {
         url: '../php/envioProductos.php',
         type: 'POST',
         data: formData,
-        dataType: 'json', // Asegúrate de recibir una respuesta en JSON
-        success: function(data) {
-            console.log(data); // Verifica la respuesta en la consola
+        success: function(response) {
+            console.log(response);
+            const data = JSON.parse(response); // Parsear la respuesta JSON
             if (data.success) {
                 mostrarMensaje(data.message, 'success'); // Mostrar mensaje de éxito
                 $('#product-form')[0].reset(); // Limpiar el formulario
-                listarProductos(); // Actualizar la lista de productos
+                $('#productos-lista').hide(); // Ocultar lista de productos si estaba visible
             } else {
                 mostrarMensaje(data.message, 'error'); // Mostrar mensaje de error
             }
@@ -50,11 +60,11 @@ function listarProductos() {
         url: '../php/listarproductos.php', // Asegúrate de que esta URL esté correctamente configurada
         type: 'GET',
         success: function(response) {
-            console.log(response); // Verifica la respuesta en la consola
-            $('#productos-lista').html(response);
+            console.log(response);
+            $('#productos-lista').html(response).show(); // Mostrar la lista de productos
         },
         error: function() {
-            $('#productos-lista').html('Error al cargar la lista de productos.');
+            $('#productos-lista').html('Error al cargar la lista de productos.').show();
         }
     });
 }
@@ -70,9 +80,7 @@ function mostrarMensaje(mensaje, tipo) {
     mensajeDiv.removeClass('success-message error-message'); // Limpiar clases anteriores
     mensajeDiv.addClass(tipo === 'success' ? 'success-message' : 'error-message'); // Agregar clase según el tipo
     mensajeDiv.show(); // Mostrar el mensaje
-	
-	// Ocultar el mensaje después de 3 segundos (3000 milisegundos)
     setTimeout(function() {
-        mensajeDiv.fadeOut(); // Puedes usar fadeOut para un desvanecimiento suave
-    }, 3000); // 3000 milisegundos = 3 segundos
+        mensajeDiv.hide(); // Ocultar el mensaje después de un tiempo
+    }, 3000);
 }
