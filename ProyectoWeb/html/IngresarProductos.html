@@ -7,6 +7,37 @@
     <link href="../css/estilo.css" rel="stylesheet" type="text/css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../js/bodegero.js"></script>
+    <style>
+        /* Estilo para el modal */
+        #modal {
+            display: none; /* Oculto por defecto */
+            position: fixed; /* Fijo en la pantalla */
+            z-index: 1000; /* Asegúrate de que esté sobre otros elementos */
+            left: 0;
+            top: 0;
+            width: 100%; /* Ancho completo */
+            height: 100%; /* Alto completo */
+            background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro con opacidad */
+        }
+        #form-container {
+            position: absolute; /* Posicionamiento absoluto dentro del modal */
+            top: 50%; /* Centrado verticalmente */
+            left: 50%; /* Centrado horizontalmente */
+            transform: translate(-50%, -50%); /* Para centrar el formulario */
+            background-color: white; /* Fondo blanco */
+            padding: 20px; /* Espaciado interno */
+            border: 1px solid #ccc; /* Borde */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
+            width: 90%; /* Ancho del formulario */
+            max-width: 500px; /* Ancho máximo */
+        }
+        .close-btn {
+            cursor: pointer;
+            float: right;
+            font-size: 20px;
+            color: #ff0000; /* Color rojo */
+        }
+    </style>
 </head>
 <body>
     <div class="sidebar">
@@ -32,60 +63,131 @@
         </form>
     </div>
 
-    <div class="main-content">
-    <div class="form-container" id="formulario">
-        <h2 class="form-header">Ingresar Nuevo Producto</h2>
-        <form id="product-form" action="../php/envioProductos.php" method="post">
-            <input type="hidden" name="es_admin" value="false">
-            <div class="form-group">
-                <label for="nombre">Nombre del Producto</label>
-                <input type="text" id="nombre" name="nombre" class="form-control" required>
+    <div class="main-content" style="position: relative;"> <!-- Añade position: relative -->
+        <div class="form-container" id="formulario">
+            <h2 class="form-header">Ingresar Nuevo Producto</h2>
+            <form id="product-form" action="../php/envioProductos.php" method="post">
+                <input type="hidden" name="es_admin" value="false">
+                <div class="form-group">
+                    <label for="nombre">Nombre del Producto</label>
+                    <input type="text" id="nombre" name="nombre" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="precioUnitario">Precio Unitario</label>
+                    <input type="number" id="precioUnitario" name="precioUnitario" class="form-control" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="cantidad">Cantidad</label>
+                    <input type="number" id="cantidad" name="cantidad" class="form-control" step="1" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="categoria">Categoría</label>
+                    <select id="categoria" name="categoria" class="form-control" required>
+                        <option value="">Selecciona una categoría</option>
+                        <option value="Herramientas">Herramientas</option>
+                        <option value="Materiales">Materiales</option>
+                        <option value="Electrodomésticos">Electrodomésticos</option>
+                        <option value="Accesorios">Accesorios</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="fechaIngreso">Fecha de Ingreso</label>
+                    <input type="date" id="fechaIngreso" name="fechaIngreso" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="detalle">Descripción del Producto</label>
+                    <textarea id="detalle" name="detalle" class="form-control" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Agregar Producto</button>
+            </form>
+            <div id="mensaje" class="mensaje" style="display: none;"></div>
+        </div>
+
+        <div id="productos-lista" class="productos-lista" style="display: none;">
+            <input type="text" id="buscador-productos" placeholder="Buscar productos...">
+            <table>
+                <thead>
+                    <tr>
+                        <!-- Aquí se llenarán los encabezados de los productos -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aquí se llenarán los productos -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Modal para actualizar producto -->
+        <div id="modal">
+            <div id="form-container">
+                <span class="close-btn" id="close-form">&times;</span> <!-- Botón de cierre -->
+                <h2 class="form-header">Actualizar Producto</h2>
+                <form id="update-form">
+                    <input type="hidden" name="codigo" id="codigo">
+                    <div class="form-group">
+                        <label for="nombre-editar">Nombre del Producto:</label>
+                        <input type="text" id="nombre-editar" name="nombre" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="precioUnitario-editar">Precio Unitario:</label>
+                        <input type="number" id="precioUnitario-editar" name="precioUnitario" class="form-control" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cantidad-editar">Cantidad:</label>
+                        <input type="number" id="cantidad-editar" name="cantidad" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="categoria-editar">Categoría:</label>
+                        <select id="categoria-editar" name="categoria" class="form-control" required>
+                            <option value="Herramientas">Herramientas</option>
+                            <option value="Materiales">Materiales</option>
+                            <option value="Electrodomésticos">Electrodomésticos</option>
+                            <option value="Accesorios">Accesorios</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="fechaIngreso-editar">Fecha de Ingreso:</label>
+                        <input type="date" id="fechaIngreso-editar" name="fechaIngreso" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="detalle-editar">Descripción:</label>
+                        <textarea id="detalle-editar" name="detalle" class="form-control" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Actualizar Producto</button>
+                </form>
             </div>
-            <div class="form-group">
-                <label for="precioUnitario">Precio Unitario</label>
-                <input type="number" id="precioUnitario" name="precioUnitario" class="form-control" step="0.01" required>
-            </div>
-            <div class="form-group">
-                <label for="cantidad">Cantidad</label>
-                <input type="number" id="cantidad" name="cantidad" class="form-control" step="1" min="1" required>
-            </div>
-            <div class="form-group">
-                <label for="categoria">Categoría</label>
-                <select id="categoria" name="categoria" class="form-control" required>
-                    <option value="">Selecciona una categoría</option>
-                    <option value="Herramientas">Herramientas</option>
-                    <option value="Materiales">Materiales</option>
-                    <option value="Electrodomésticos">Electrodomésticos</option>
-                    <option value="Accesorios">Accesorios</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="fechaIngreso">Fecha de Ingreso</label>
-                <input type="date" id="fechaIngreso" name="fechaIngreso" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="detalle">Descripción del Producto</label>
-                <textarea id="detalle" name="detalle" class="form-control" required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Agregar Producto</button>
-        </form>
-        <div id="mensaje" class="mensaje" style="display: none;"></div>
+        </div>
     </div>
-    <div id="productos-lista" class="productos-lista" style="display: none;">
-    <input type="text" id="buscador-productos" placeholder="Buscar productos...">
-    <table>
-    <thead>
-        <tr>
+
+    <script>
+        // JavaScript para cerrar el modal
+        $(document).on('click', '#close-form', function() {
+            $('#modal').hide(); // Ocultar el modal
+        });
+
+        // Asegúrate de que el formulario se muestre correctamente al editar
+        $(document).on('click', '.edit-btn', function() {
+            const row = $(this).closest('tr');
+            const codigo = row.data('codigo');
+            const nombre = row.find('td:nth-child(2)').text();
+            const precioUnitario = row.find('td:nth-child(3)').text();
+            const cantidad = row.find('td:nth-child(4)').text();
+            const categoria = row.find('td:nth-child(5)').text();
+            const fechaIngreso = row.find('td:nth-child(6)').text();
+            const detalle = row.find('td:nth-child(7)').text();
+
+            // Llenar el formulario de actualización
+            $('#codigo').val(codigo);
+            $('#nombre-editar').val(nombre);
+            $('#precioUnitario-editar').val(precioUnitario);
+            $('#cantidad-editar').val(cantidad);
+            $('#categoria-editar').val(categoria);
+            $('#fechaIngreso-editar').val(fechaIngreso);
+            $('#detalle-editar').val(detalle);
             
-        </tr>
-    </thead>
-    <tbody>
-        <!-- Aquí se llenarán los productos -->
-    </tbody>
-</table>
-
-</div>
-
-</div>
+            // Mostrar el modal de actualización
+            $('#modal').show();
+        });
+    </script>
 </body>
 </html>

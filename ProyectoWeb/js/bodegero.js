@@ -13,9 +13,14 @@ $(document).ready(function() {
     // Manejador de clic para "Listar productos"
     $('#listarProductos').click(function(e) {
         e.preventDefault();
-        $('#formulario').hide();
-        $('#productos-lista').show();
-        listarProductos(); // Cargar la lista de productos
+        $('#formulario').hide(); // Oculta el formulario de ingreso
+        $('#productos-lista').show(); // Muestra la lista de productos
+        $('#productos-lista tbody').empty(); // Limpia la tabla antes de cargar nuevos datos
+
+        // Cargar productos
+        $.get('../php/listarproductos.php', function(data) {
+            $('#productos-lista tbody').html(data); // Agrega los productos a la tabla
+        });
     });
 
     // Función para agregar un producto

@@ -382,4 +382,15 @@ tr:hover {
     max-height: 400px; /* Ajusta según sea necesario */
 
 }
+#form-container {
+            position: absolute; /* Cambiado a absoluto */
+            top: 20px; /* Ajusta según sea necesario */
+            left: 50%; /* Centrado horizontalmente */
+            transform: translateX(-50%); /* Para centrar el formulario */
+            background-color: white; /* Fondo blanco */
+            padding: 20px; /* Espaciado interno */
+            border: 1px solid #ccc; /* Borde */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
+            z-index: 1000; /* Asegúrate de que esté sobre otros elementos */
+        }
 
