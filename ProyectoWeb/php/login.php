@@ -12,7 +12,6 @@ if ($conn->connect_error) {
     die("Conexión fallida: " . $conn->connect_error);
 }
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Obtener los datos del formulario
     $usuario = $_POST['username'];
@@ -26,35 +25,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Verificar si se encontró el usuario
     if ($result->num_rows > 0) {
-        // Obtener el rol del usuario
-        $row = $result->fetch_assoc();
-        $rol = $row['rol'];
-
-        // Redirigir según el rol
-        switch ($rol) {
-            case 'admin':
-                header("Location: ../html/admin.html");
-                break;
-            case 'vendedor':
-                header("Location: ../vendedor.html");
-                break;
-            case 'bodeguero':
-                header("Location: ../html/bodegero.html");
-                break;
-            case 'supervisor':
-                header("Location: ../supervisor.html");
-                break;
-            case 'supersupervisor':
-                header("Location: ../supersupervisor.html");
-                break;
-            default:
-                echo "Rol no reconocido.";
-                break;
-        }
-        exit();
+        // Redirigir a la página de bienvenida
+        echo "<script>
+                    window.location.href = '../html/admin.html';
+                  </script>";
     } else {
         // Inicio de sesión fallido
-        echo "Usuario o contraseña incorrectos.";
+        echo "<script>
+                    window.location.href = '../html/admin.html';
+                  </script>";
     }
 
     $stmt->close();

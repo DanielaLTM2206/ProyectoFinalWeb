@@ -320,3 +320,44 @@ tr:hover {
 .success-message {
     background-color: #28a745; /* Color verde para el mensaje de éxito */
 }
+
+/* Estilos del contenedor principal */
+#main-content {
+    margin-left: 260px; /* Espacio para la barra lateral */
+    padding: 20px;
+    width: calc(100% - 260px); /* Ajusta el ancho del contenedor */
+    display: flex;
+    flex-direction: column;
+    overflow: auto; /* Permitir desplazamiento si el contenido es más grande */
+}
+
+/* Estilos de la tabla */
+.table-container {
+    width: 100%; /* Asegura que el contenedor de la tabla ocupe todo el ancho disponible */
+    overflow-x: auto; /* Permitir desplazamiento horizontal si la tabla es muy grande */
+}
+
+.table.styled-table {
+    width: 100%; /* Asegura que la tabla ocupe todo el ancho disponible */
+    border-collapse: collapse; /* Elimina el espacio entre celdas de la tabla */
+}
+
+.table.styled-table th, 
+.table.styled-table td {
+    padding: 12px 15px; /* Espaciado interno de celdas */
+    text-align: left; /* Alineación del texto a la izquierda */
+    border-bottom: 1px solid #ddd; /* Línea separadora entre filas */
+}
+
+.table.styled-table th {
+    background-color: #343a40; /* Fondo oscuro para los encabezados */
+    color: #f8f9fa; /* Texto claro para los encabezados */
+}
+
+.table.styled-table tr:nth-child(even) {
+    background-color: #f2f2f2; /* Fondo claro para filas pares */
+}
+
+.table.styled-table tr:hover {
+    background-color: #ddd; /* Fondo en hover para filas */
+}
