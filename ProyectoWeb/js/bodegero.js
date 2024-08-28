@@ -2,12 +2,14 @@ $(document).ready(function() {
     // Mostrar el formulario de ingreso al cargar la página
     $('#formulario').show();
     $('#productos-lista').hide();
+    $('#modal').hide(); // Asegúrate de que el modal esté oculto al inicio
 
     // Manejador de clic para "Ingresar Producto"
     $('#ingresarProducto').click(function(e) {
         e.preventDefault();
         $('#formulario').show();
         $('#productos-lista').hide();
+        $('#modal').hide(); // Asegúrate de ocultar el modal
     });
 
     // Manejador de clic para "Listar productos"
@@ -28,18 +30,41 @@ $(document).ready(function() {
         e.preventDefault(); // Evitar el envío del formulario por defecto
         agregarProducto();
     });
-	
-// Manejador del buscador de productos
-$('#buscador-productos').on('keyup', function() {
-    listarProductos(); // Actualiza la lista de productos con el término de búsqueda
+
+    // Manejador del buscador de productos
+    $('#buscador-productos').on('keyup', function() {
+        listarProductos(); // Actualiza la lista de productos con el término de búsqueda
+    });
+
+    // Manejador para abrir el modal de actualización
+    $(document).on('click', '.edit-btn', function() {
+        const row = $(this).closest('tr');
+        const codigo = row.data('codigo');
+        const nombre = row.find('td:nth-child(2)').text();
+        const precioUnitario = row.find('td:nth-child(3)').text();
+        const cantidad = row.find('td:nth-child(4)').text();
+        const categoria = row.find('td:nth-child(5)').text();
+        const fechaIngreso = row.find('td:nth-child(6)').text();
+        const detalle = row.find('td:nth-child(7)').text();
+
+        // Llenar el formulario de actualización
+        $('#codigo').val(codigo);
+        $('#nombre-editar').val(nombre);
+        $('#precioUnitario-editar').val(precioUnitario);
+        $('#cantidad-editar').val(cantidad);
+        $('#categoria-editar').val(categoria);
+        $('#fechaIngreso-editar').val(fechaIngreso);
+        $('#detalle-editar').val(detalle);
+        
+        // Mostrar el modal de actualización
+        $('#modal').show();
+    });
+
+    // Manejador para cerrar el modal
+    $(document).on('click', '#close-form', function() {
+        $('#modal').hide(); // Ocultar el modal
+    });
 });
-;
-
-
-	
-
-});
-
 
 function agregarProducto() {
     if (!validarFormulario()) {
@@ -86,9 +111,6 @@ function listarProductos() {
         }
     });
 }
-
-
-
 
 function validarFormulario() {
     return $('#nombre').val() && $('#precioUnitario').val() && $('#cantidad').val() && $('#categoria').val() && $('#fechaIngreso').val() && $('#detalle').val();
