@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ingreso de Productos - Bodeguero</title>
     <link href="../css/estilo.css" rel="stylesheet" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../js/bodegero.js"></script>
 </head>
 <body>
     <div class="sidebar">
@@ -19,7 +21,7 @@
                     <li><a href="#">Ingresar Producto</a></li>
                     <li><a href="#">Actualizar Producto</a></li>
                     <li><a href="#">Buscar Producto</a></li>
-                    <li><a href="#">Listar productos</a></li>
+                    <li><a href="#" id="listarProductos">Listar productos</a></li>
                 </ul>
             </li>
             <li><a href="#">Utilidades</a></li>
@@ -51,7 +53,13 @@
                 </div>
                 <div class="form-group">
                     <label for="categoria">Categoría</label>
-                    <input type="text" id="categoria" name="categoria" class="form-control" required>
+                    <select id="categoria" name="categoria" class="form-control" required>
+                        <option value="">Selecciona una categoría</option>
+                        <option value="Herramientas">Herramientas</option>
+                        <option value="Materiales">Materiales</option>
+                        <option value="Electrodomésticos">Electrodomésticos</option>
+                        <option value="Accesorios">Accesorios</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="fechaIngreso">Fecha de Ingreso</label>
@@ -63,9 +71,13 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Agregar Producto</button>
             </form>
+            <div id="mensaje" class="mensaje" style="display: none;"></div>
+        </div>
+
+        <!-- Contenedor para la lista de productos -->
+        <div id="productos-lista" class="productos-lista">
+            <!-- La lista de productos se cargará aquí -->
         </div>
     </div>
-
-    <script type="text/javascript" src="../js/bodegero.js"></script>
 </body>
 </html>

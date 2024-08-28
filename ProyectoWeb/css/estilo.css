@@ -6,14 +6,6 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-#usuarioFormContainer {
-    display: none; /* Asegura que el formulario esté oculto al cargar la página */
-    margin-top: 20px;
-}
-#productoFormContainer{
-    display: none; /* Asegura que el formulario esté oculto al cargar la página */
-    margin-top: 20px;
-}
 /* Estilo para el body */
 body {
     display: flex;
@@ -38,7 +30,7 @@ body {
     flex-direction: column;
     justify-content: space-between;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-	z-index: 1000;
+    z-index: 1000;
 }
 
 .sidebar-header h2 {
@@ -128,14 +120,27 @@ body {
     background-color: #c82333; /* Color de fondo en hover más oscuro */
 }
 
-/* Estilos del contenedor del formulario */
-.container-fluid {
+/* Estilos del contenedor principal */
+.main-content {
     margin-left: 260px; /* Espacio para la barra lateral */
     padding: 20px;
     width: calc(100% - 260px); /* Ajusta el ancho del contenedor */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra horizontalmente el contenido */
 }
 
 /* Estilos del formulario */
+.form-container {
+    width: 100%;
+    max-width: 600px; /* Máximo ancho del formulario */
+    padding: 20px;
+    background-color: #fff; /* Fondo blanco para el formulario */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra alrededor del formulario */
+    margin-bottom: 40px; /* Espacio inferior para separar del contenido siguiente */
+}
+
 .form-header {
     font-size: 24px;
     font-weight: bold;
@@ -205,14 +210,14 @@ body {
     display: flex;
     gap: 10px; /* Espacio entre botones */
 }
-	
+
 .login-container {
     display: flex;
     justify-content: center; /* Centra horizontalmente */
     align-items: center; /* Centra verticalmente */
     height: 100vh; /* Asegura que el contenedor ocupe toda la altura de la ventana */
-}	
- 
+}
+
 .login-form {
     background-color: #fff; /* Fondo blanco para el formulario */
     padding: 30px;
@@ -277,3 +282,41 @@ button:hover {
     margin-top: 10px;
 }
 
+/* Estilos para la tabla */
+table {
+    width: 100%; /* Ancho completo */
+    border-collapse: collapse; /* Colapsa los bordes */
+    margin-top: 40px; /* Espacio superior entre el formulario y la tabla */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra para la tabla */
+}
+
+th, td {
+    padding: 15px; /* Espacio interno */
+    text-align: center; /* Centra el texto */
+    border: 1px solid #ced4da; /* Borde de las celdas */
+}
+
+th {
+    background-color: #007bff; /* Color de fondo para encabezados */
+    color: #fff; /* Color de texto en encabezados */
+    font-weight: bold; /* Negrita para encabezados */
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2; /* Color de fondo para filas pares */
+}
+
+tr:hover {
+    background-color: #e9ecef; /* Color de fondo al pasar el mouse */
+}
+
+.mensaje {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff; /* Color de texto blanco */
+}
+
+.success-message {
+    background-color: #28a745; /* Color verde para el mensaje de éxito */
+}
