@@ -14,23 +14,25 @@ if ($conn === null) {
 }
 
 // Consulta para obtener productos
-$query = "SELECT * FROM productos";
+$query = "SELECT * FROM credenciales";
 $result = $conn->query($query);
 
 if ($result->num_rows > 0) {
     echo "<table class='table'>";
-    echo "<tr><th>Código</th><th>Nombre</th><th>Precio Unitario</th><th>Cantidad</th><th>Categoría</th><th>Fecha de Ingreso</th><th>Descripción</th><th>Acciones</th></tr>";
+    echo "<tr><th>Id</th><th>Usuario</th><th>Contraseña</th><th>Rol</th><th>Nombre</th><th>Apellido</th><th>Descripción</th><th>Accesos</th><th>Estado</th><th>Acciones</th></tr>";
     while ($row = $result->fetch_assoc()) {
         echo "<tr>";
-        echo "<td>".$row['codigo']."</td>";
+        echo "<td>".$row['id']."</td>";
+        echo "<td>".$row['usuario']."</td>";
+        echo "<td>".$row['contraseña']."</td>";
+        echo "<td>".$row['rol']."</td>";
         echo "<td>".$row['nombre']."</td>";
-        echo "<td>".$row['precioUnitario']."</td>";
-        echo "<td>".$row['cantidad']."</td>";
-        echo "<td>".$row['categoria']."</td>";
-        echo "<td>".$row['fechaIngreso']."</td>";
-        echo "<td>".$row['detalle']."</td>";
-		echo "<td><a href='actualizarproducto.php'>Editar</a><br>
-		<a href='borrarpruducto.php'>Eliminar</a>
+        echo "<td>".$row['apellido']."</td>";
+        echo "<td>".$row['descripcion']."</td>";
+        echo "<td>".$row['accesos']."</td>";
+        echo "<td>".$row['estado']."</td>";
+				echo "<td><a href='actualizarusuario.php'>Editar</a><br>
+		<a href='php/borrarusuario.php'>Eliminar</a>
 		</td>";
         echo "</tr>";
     }

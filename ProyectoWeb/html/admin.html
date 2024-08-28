@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Panel de Control</title>
     <link href="../css/estilo.css" rel="stylesheet" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div class="sidebar">
@@ -17,15 +18,15 @@
                 <a href="#" class="dropdown-btn">Productos &#9662;</a>
                 <ul class="dropdown-menu">
                     <li><a href="#" id="ingresarProductoLink">Ingresar Producto</a></li>
-                    <li><a href="#">Actualizar Producto</a></li>
-                    <li><a href="#">Buscar Producto</a></li>
-                    <li><a href="#">Listar productos</a></li>
+                    <li><a href="#" id="actualizarProductoLink">Actualizar Producto</a></li>
+                    <li><a href="#" id="buscarProductoLink">Buscar Producto</a></li>
+                    <li><a href="#" id="listarProductoLink">Listar productos</a></li>
                 </ul>
             </li>
-            <li><a href="#">Clientes</a></li>
-            <li><a href="#">Provedores</a></li>
-            <li><a href="#">Reportes</a></li>
-            <li><a href="../php/desplegarUsuarios.php">Perfiles</a></li>
+            <li><a href="#" id="clientesLink">Clientes</a></li>
+            <li><a href="#" id="proveedoresLink">Proveedores</a></li>
+            <li><a href="#" id="reportesLink">Reportes</a></li>
+            <li><a href="#" id="listarUsuarioLink">Perfiles</a></li>
         </ul>
         <form id="form1" action="../index.html">
             <button id="logoutBtn">Cerrar Sesión</button>
@@ -33,10 +34,9 @@
     </div>
 
     <div id="main-content">
-        <!-- Contenedor del formulario de usuarios -->
-        <div id="usuarioFormContainer">
-            <h2>Agregar Nuevo Usuario</h2>
-            <br>
+        <!-- Aquí se cargará el contenido dinámico según la selección del menú -->
+        <div id="usuarioFormContainer" style="display: none;">
+            <h2>Ingresar Nuevo Usuario</h2><br>
             <form id="usuarioForm" name="form1" method="post" action="../php/envioUsuarios.php">
                 <div class="form-group">
                     <label for="usuario">Usuario</label>
@@ -72,13 +72,14 @@
                 </div>
             </form>
         </div>
-        <div id="productoFormContainer">
-        <div class="form-container">
-         <h2 class="form-header">Ingresar Nuevo Producto</h2>
-                     <form id="product-form" action="../php/envioProductos.php" method="post">
+
+        <div id="productoFormContainer" style="display: none;">
+            <h2>Ingresar Nuevo Producto</h2>
+            <br>
+            <form id="product-form" action="../php/envioProductos.php" method="post">
                 <div class="form-group">
                     <label for="product-name">Nombre del Producto</label>
-                    <input type="text"  id="product-name" name="nombre" class="form-control" required>
+                    <input type="text" id="product-name" name="nombre" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label for="product-amount">Cantidad</label>
@@ -113,8 +114,46 @@
                 <button type="submit" class="btn btn-primary">Agregar Producto</button>
             </form>
         </div>
+
+        <div id="actualizarFormContainer" style="display: none;">
+            <h2>Actualizar Productos</h2>
+            <form id="reportesForm" method="post" action="../php/envioReportes.php">
+            </form>
+        </div>
+
+        <div id="buscarFormContainer" style="display: none;">
+            <h2>Buscar Productos</h2>
+            <form id="reportesForm" method="post" action="../php/envioReportes.php">
+            </form>
+        </div>
+
+        <div id="productos-lista" class="productos-lista" style="display: none;">
+            <h2>Listar Productos</h2>
+        </div>
+
+        <div id="clientesFormContainer" style="display: none;">
+            <h2>Gestión de Clientes</h2>
+            <form id="clientesForm" method="post" action="../php/envioClientes.php">
+            </form>
+        </div>
+
+        <div id="proveedoresFormContainer" style="display: none;">
+            <h2>Gestión de Proveedores</h2>
+            <form id="proveedoresForm" method="post" action="../php/envioProveedores.php">
+            </form>        
+        </div>
+
+        <div id="reportesFormContainer" style="display: none;">
+            <h2>Generar Reportes</h2>
+            <form id="reportesForm" method="post" action="../php/envioReportes.php">
+            </form>
+        </div>
+
+        <div id="usuarios-lista" class="usuarios-lista" style="display: none;">
+            <h2>Listar Usuarios</h2>
         </div>
     </div>
+
     <script src="../js/ocultarDatos.js" type="text/javascript"></script>
 </body>
 </html>
