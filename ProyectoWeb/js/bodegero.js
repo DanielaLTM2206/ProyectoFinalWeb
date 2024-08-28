@@ -23,7 +23,18 @@ $(document).ready(function() {
         e.preventDefault(); // Evitar el envío del formulario por defecto
         agregarProducto();
     });
+	
+// Manejador del buscador de productos
+$('#buscador-productos').on('keyup', function() {
+    listarProductos(); // Actualiza la lista de productos con el término de búsqueda
 });
+;
+
+
+	
+
+});
+
 
 function agregarProducto() {
     if (!validarFormulario()) {
@@ -56,18 +67,23 @@ function agregarProducto() {
 }
 
 function listarProductos() {
+    const searchTerm = $('#buscador-productos').val(); // Obtener el término de búsqueda
     $.ajax({
-        url: '../php/listarproductos.php', // Asegúrate de que esta URL esté correctamente configurada
+        url: '../php/listarproductos.php?search=' + encodeURIComponent(searchTerm), // Pasar el término de búsqueda
         type: 'GET',
         success: function(response) {
-            console.log(response);
-            $('#productos-lista').html(response).show(); // Mostrar la lista de productos
+            $('#productos-lista tbody').html(response); // Llenar solo el tbody
+            $('#productos-lista').show(); // Mostrar la lista de productos
         },
         error: function() {
-            $('#productos-lista').html('Error al cargar la lista de productos.').show();
+            $('#productos-lista tbody').html('<tr><td colspan="8">Error al cargar la lista de productos.</td></tr>');
+            $('#productos-lista').show();
         }
     });
 }
+
+
+
 
 function validarFormulario() {
     return $('#nombre').val() && $('#precioUnitario').val() && $('#cantidad').val() && $('#categoria').val() && $('#fechaIngreso').val() && $('#detalle').val();

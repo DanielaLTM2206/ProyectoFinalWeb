@@ -58,16 +58,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
         $response["success"] = true;
-            echo "<script>
-                    alert('Datos almacenados correctamente...');
-                    window.location.href = '../html/admin.html';
-                  </script>";
+        $response["message"] = "Datos almacenados correctamente.";
     } else {
         $response["success"] = false;
-            echo "<script>
-                    alert('Error al almacenar los datos: " . $stmt->error . "');
-                    window.location.href = '../html/admin.html';
-                  </script>";
+        $response["message"] = "Error al almacenar los datos: " . $stmt->error;
     }
 
     $stmt->close();
