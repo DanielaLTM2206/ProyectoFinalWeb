@@ -42,12 +42,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($stmt->execute()) {
             echo "<script>
                     alert('Datos almacenados correctamente...');
-                    window.location.href = '../html/nuevosUsuarios.html';
+                    window.location.href = '../html/admin.html';
                   </script>";
         } else {
             echo "<script>
                     alert('Error al almacenar los datos: " . $stmt->error . "');
-                    window.location.href = '../html/nuevosUsuarios.html';
+                    window.location.href = '../html/admin.html';
                   </script>";
         }
 

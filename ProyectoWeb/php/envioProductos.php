@@ -58,10 +58,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
         $response["success"] = true;
-        $response["message"] = "Producto agregado con éxito.";
+            echo "<script>
+                    alert('Datos almacenados correctamente...');
+                    window.location.href = '../html/admin.html';
+                  </script>";
     } else {
         $response["success"] = false;
-        $response["message"] = "Error en la inserción: " . $stmt->error;
+            echo "<script>
+                    alert('Error al almacenar los datos: " . $stmt->error . "');
+                    window.location.href = '../html/admin.html';
+                  </script>";
     }
 
     $stmt->close();
