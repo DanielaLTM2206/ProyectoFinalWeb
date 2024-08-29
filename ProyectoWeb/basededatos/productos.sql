@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 27-08-2024 a las 22:35:00
+-- Tiempo de generación: 29-08-2024 a las 16:54:49
 -- Versión del servidor: 8.0.17
 -- Versión de PHP: 7.3.10
 
@@ -44,9 +44,24 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`codigo`, `nombre`, `cantidad`, `categoria`, `fechaIngreso`, `detalle`, `precioUnitario`, `precioVenta`) VALUES
-(1, 'manzana', 41, '', '2024-08-27', 'jdkajdkad dajdkajda djakdakdjaiwdjwadkwodkwd dwidwodwidw', '45.00', '54.00'),
-(2, 'martillo', 12, 'Herramientas', '2024-08-27', 'dewdwdwde', '3.00', '3.00'),
-(3, 'martillo', 45, 'Herramientas', '2024-08-27', 'dwdqad', '4.00', NULL);
+(29, 'hjh', 45, 'Herramientas', '0005-05-05', '454', '54.00', NULL),
+(30, 'Daniela', 7, 'Electrodomésticos', '2024-08-07', 'dsd', '7.00', NULL),
+(31, 'HOla', 12, 'Electrodomésticos', '2024-08-28', 'si', '2.00', NULL),
+(32, 'HOla', 12, 'Electrodomésticos', '2024-08-28', 'si', '2.00', NULL),
+(33, 'HOla', 12, 'Electrodomésticos', '2024-08-28', 'si', '2.00', NULL),
+(34, 'HOla', 12, 'Electrodomésticos', '2024-08-28', 'si', '2.00', NULL),
+(35, 'HOla', 12, 'Electrodomésticos', '2024-08-28', 'si', '2.00', NULL),
+(36, 'tornillo', 12, 'Herramientas', '2024-08-28', 'nuevo ingreso', '2.00', NULL),
+(37, 'hola', 46, 'Herramientas', '2024-08-08', 'oy', '2.00', NULL),
+(38, 'Dilan Tituaña', 12, 'Electrodomésticos', '2024-08-19', 'era', '2.00', NULL),
+(39, 'sasasa', 3, 'Materiales', '2024-08-28', 'prueba', '5.00', NULL),
+(40, 'dsd', 2, 'Herramientas', '2024-08-29', 'editado', '5.00', NULL),
+(41, 'dsd', 2, 'Materiales', '2024-08-28', 'sx', '5.00', NULL),
+(42, 'nuevo', 2, 'Herramientas', '2024-08-28', 'dd', '5.00', NULL),
+(43, 'Daniela', 2, 'Herramientas', '2024-08-28', '12', '4.00', NULL),
+(44, 'dsds', 4, 'Herramientas', '7777-07-07', '4hj', '45.00', NULL),
+(49, 'dsds', 4, 'Accesorios', '7777-07-07', 'editado', '45.00', NULL),
+(50, 'Daniela', 4, 'Herramientas', '0004-04-04', '5', '4.00', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -66,7 +81,7 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
