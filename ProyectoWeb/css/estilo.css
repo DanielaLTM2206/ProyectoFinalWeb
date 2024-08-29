@@ -422,4 +422,23 @@ tr:hover {
             font-size: 20px;
             color: #ff0000; /* Color rojo */
         }
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+    max-width: 1200px; /* Puedes ajustar este valor */
+}
+
+.checkbox-group label {
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #495057;
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-right: 10px;
+}
 
