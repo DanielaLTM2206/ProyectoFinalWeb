@@ -19,7 +19,7 @@ $result = $conn->query($query);
 
 if ($result->num_rows > 0) {
     echo "<table class='table'>";
-    echo "<tr><th>Id</th><th>Usuario</th><th>Contraseña</th><th>Rol</th><th>Nombre</th><th>Apellido</th><th>Descripción</th><th>Accesos</th><th>Estado</th><th>Acciones</th></tr>";
+    echo "<tr><th>Id</th><th>Usuario</th><th>Contraseña</th><th>Rol</th><th>Nombre</th><th>Descripción</th><th>Accesos</th><th>Estado</th><th>Acciones</th></tr>";
     while ($row = $result->fetch_assoc()) {
         echo "<tr>";
         echo "<td>".$row['id']."</td>";
@@ -27,7 +27,6 @@ if ($result->num_rows > 0) {
         echo "<td>".$row['contraseña']."</td>";
         echo "<td>".$row['rol']."</td>";
         echo "<td>".$row['nombre']."</td>";
-        echo "<td>".$row['apellido']."</td>";
         echo "<td>".$row['descripcion']."</td>";
         echo "<td>".$row['accesos']."</td>";
         echo "<td>".$row['estado']."</td>";
